@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>FoodManager - Available Foods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <div th:if="${food != null}">
+        <div>
+            <div th:text="${food.foodName}">FoodName</div>
+            <div th:text="${food.chefGroup}">ChefGroup</div>
+            <div th:text="${food.foodId}">FoodId</div>
+        </div>
+    </div>
+
+    <div th:if="${food} == null">
+        <h1 th:text="'No food found with FoodId: ' + ${param.foodId}">Not Found</h1>
+    </div>
+
+</body>
+</html>

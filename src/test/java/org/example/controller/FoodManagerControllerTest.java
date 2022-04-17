@@ -1,9 +1,8 @@
 package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.model.TodoEntity;
-import org.example.model.TodoRequest;
-import org.example.service.TodoService;
+import org.example.model.FoodEntity;
+import org.example.service.FoodManagerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +17,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(TodoController.class)
-class TodoControllerTest {
+@WebMvcTest(FoodManagerController.class)
+class FoodManagerControllerTest {
 
     @Autowired
     MockMvc mvc;
 
     @MockBean
-    private TodoService todoService;
+    private FoodManagerService foodManagerService;
 
-    private TodoEntity expected;
+    private FoodEntity expected;
 
     @BeforeEach
     void setup() {
-        this.expected = new TodoEntity();
+        this.expected = new FoodEntity();
         this.expected.setId(123L);
         this.expected.setTitle("TEST TITLE");
         this.expected.setOrder(0L);
@@ -40,10 +39,10 @@ class TodoControllerTest {
 
     @Test
     void create() throws Exception {
-        when(this.todoService.add(any(TodoRequest.class)))
+        when(this.foodManagerService.add(any(TodoRequest.class)))
                 .then((i) -> {
                     TodoRequest request = i.getArgument(0, TodoRequest.class);
-                    return new TodoEntity(this.expected.getId(),
+                    return new FoodEntity(this.expected.getId(),
                                             request.getTitle(),
                                             this.expected.getOrder(),
                                             this.expected.getCompleted());

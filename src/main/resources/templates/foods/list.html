@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>FoodManager - Available foods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <h1 th:text="#{foods.list.title}">Available Foods</h1>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="#{foods.list.table.foodName}">Food Name</th>
+                <th th:text="#{foods.list.table.chefGroup}">Chef Group</th>
+                <th th:text="#{foods.list.table.foodId}">Food Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="food : ${foods}">
+                <td th:text="${food.foodName}">FoodName</td>
+                <td th:text="${food.chefGroup}">ChefGroup</td>
+                <td><a th:href="@{/foods.html(foodId=${food.foodId})}" th:text="${food.foodId}" href="#">FoodId</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

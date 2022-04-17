@@ -1,7 +1,6 @@
 package org.example.service;
 
-import org.example.model.TodoEntity;
-import org.example.model.TodoRequest;
+import org.example.model.FoodEntity;
 import org.example.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,42 +20,42 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TodoServiceTest {
+class FoodManagerServiceTest {
 
     @Mock
     private TodoRepository todoRepository;
 
     @InjectMocks
-    private TodoService todoService;
+    private FoodManagerService foodManagerService;
 
     @Test
     void add() {
-        when(this.todoRepository.save(any(TodoEntity.class)))
+        when(this.todoRepository.save(any(FoodEntity.class)))
                 .then(AdditionalAnswers.returnsFirstArg());
 
         TodoRequest expected = new TodoRequest();
         expected.setTitle("Test Title");
 
-        TodoEntity actual = this.todoService.add(expected);
+        FoodEntity actual = this.foodManagerService.add(expected);
 
         assertEquals(expected.getTitle(), actual.getTitle());
     }
 
     @Test
     void searchById() {
-        TodoEntity entity = new TodoEntity();
+        FoodEntity entity = new FoodEntity();
         entity.setId(123L);
         entity.setTitle("TITLE");
         entity.setOrder(0L);
         entity.setCompleted(false);
-        Optional<TodoEntity> optional = Optional.of(entity);
+        Optional<FoodEntity> optional = Optional.of(entity);
 
         given(this.todoRepository.findById(anyLong()))
                 .willReturn(optional);
 
-        TodoEntity actual = this.todoService.searchById(123L);
+        FoodEntity actual = this.foodManagerService.searchById(123L);
 
-        TodoEntity expected = optional.get();
+        FoodEntity expected = optional.get();
 
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getTitle(), actual.getTitle());
@@ -69,7 +68,7 @@ class TodoServiceTest {
         given(this.todoRepository.findById(anyLong()))
                 .willReturn(Optional.empty());
         assertThrows(ResponseStatusException.class, () -> {
-            this.todoService.searchById(123L);
+            this.foodManagerService.searchById(123L);
         });
     }
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{main.title}">Spring Boot Study - FoodManager</title>
+</head>
+<body>
+
+<h1 th:text="#{index.title}">FoodManager</h1>
+
+<a th:href="@{/foods.html}" href="#" th:text="#{index.food.link}">List of foods</a>
+
+</body>
+</html>
